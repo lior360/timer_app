@@ -15,12 +15,29 @@ class Timer{
 
     pause = ()=>{
         clearInterval(this.interval);
+        this.startButton.disabled = false;
+        this.durationInput.disabled = false;
     }
 
     tick = ()=>{
-        console.log('tick')
+        this.durationInput.disabled = true;
+        this.startButton.disabled = true;
+        const timeRemaining = this.timeRemaining;
+        if (timeRemaining>0){
+            this.timeRemaining = timeRemaining-1;
+        }
+        else{
+            this.pause();
+        }
+    }//tick
+
+    get timeRemaining(){
+        return parseFloat(this.durationInput.value);
     }
 
+    set timeRemaining(time){
+        this.durationInput.value=time;
+    }
     
 }
  //get all inputs from the body
